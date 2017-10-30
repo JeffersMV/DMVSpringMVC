@@ -11,6 +11,7 @@
     <properties>
         <junit.version>4.12</junit.version>
         <testng.version>6.11</testng.version>
+        <spring-test.version>RELEASE</spring-test.version>
         <mysql-connector-java.version>5.1.40</mysql-connector-java.version>
         <hibernate-core.version>5.2.10.Final</hibernate-core.version>
         <spring-data-jpa.version>RELEASE</spring-data-jpa.version>
@@ -32,6 +33,12 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-test.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
