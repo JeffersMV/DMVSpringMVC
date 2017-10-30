@@ -50,5 +50,4 @@
     <jpa:repositories base-package="repository" entity-manager-factory-ref="entityManagerFactory"
                       transaction-manager-ref="transactionManager"/>
 
-
 </beans>
