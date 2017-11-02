@@ -1,5 +1,6 @@
 package repositoryTest;
 
+import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +12,7 @@ import repository.AudiosRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/test-spring-date-jpa.xml"})
-public class AudioRepositoryTest {
+public class AudioRepositoryTest extends TestCase {
 
     @Autowired
     private

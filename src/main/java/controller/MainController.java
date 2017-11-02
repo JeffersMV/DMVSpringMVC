@@ -8,8 +8,10 @@ import org.apache.commons.mail.SimpleEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import repository.AudiosRepository;
 import repository.PhotosRepository;
@@ -117,5 +119,24 @@ public class MainController {
         }
         modelAndView.setViewName("/index");
         return modelAndView;
+    }
+
+
+
+
+    @RequestMapping(value = "/homeRequest", method = RequestMethod.GET)
+    public @ResponseBody String addComment() {
+        String text = "Test homeRequest";
+        System.out.println("controller");
+        return text;
+    }
+
+
+    @RequestMapping(value = "/about_myselfRequest", method = RequestMethod.POST)
+    public @ResponseBody String addComment2(Model model) {
+        String text = "Test about_myselfRequest";
+        //model.addAttribute("action", "about_myself");
+        System.out.println("controller2");
+        return text;
     }
 }

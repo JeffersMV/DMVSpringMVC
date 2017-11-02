@@ -1,6 +1,7 @@
 package repositoryTest;
 
 
+import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import repository.PhotosRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/test-spring-date-jpa.xml"})
-public class PhotoRepositoryTest {
+public class PhotoRepositoryTest extends TestCase {
 
     @Autowired
     private
