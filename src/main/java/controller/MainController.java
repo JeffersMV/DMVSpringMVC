@@ -1,6 +1,5 @@
 package controller;
 
-
 import entity.Photo;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
@@ -37,9 +36,11 @@ public class MainController {
 
     @RequestMapping(value = "/ShowServlet", method = RequestMethod.GET)
     protected ModelAndView service(HttpServletRequest request) throws ServletException, IOException {
-
+        System.out.println("Сработал ShowServlet");
+        System.out.println(request.getParameter("action"));
         ModelAndView modelAndView = new ModelAndView();
         if (Objects.equals(request.getParameter("action"), "audio")) {
+            System.out.println("Сработал параметр Аудио!");
             modelAndView = sendDTOListOnPage(audiosRepository);
         } else if (Objects.equals(request.getParameter("action"), "video")) {
             modelAndView = sendDTOListOnPage(videosRepository);
@@ -48,8 +49,10 @@ public class MainController {
         } else if (Objects.equals(request.getParameter("action"), "onePhoto")) {
             modelAndView = sendPhotoDTOOnPage(request);
         } else {
+            System.out.println("Не прошёл параметр!");
             modelAndView.setViewName("/index");
         }
+
         return modelAndView;
     }
 
@@ -63,7 +66,7 @@ public class MainController {
             modelAndView.addObject("action", "error");
             modelAndView.addObject("error", "connect_BD");
         }
-        modelAndView.setViewName("/index");
+        modelAndView.setViewName("/import");
         return modelAndView;
     }
 
@@ -122,21 +125,42 @@ public class MainController {
     }
 
 
+//    @RequestMapping(value = "/homeRequest", method = RequestMethod.GET)
+//    public @ResponseBody String addComment() {
+//        String text = "Test homeRequest";
+//        System.out.println("controller");
+//        return text;
+//    }
 
 
-    @RequestMapping(value = "/homeRequest", method = RequestMethod.GET)
-    public @ResponseBody String addComment() {
-        String text = "Test homeRequest";
+//    @RequestMapping(value = "/about_myselfRequest", method = RequestMethod.POST)
+//    public @ResponseBody String addComment2(Model model) {
+//        String text = "tfgyhj";
+//        //model.addAttribute("action", "about_myself");
+//        System.out.println("controller2");
+//        return text;
+//    }
+
+
+    //    @RequestMapping(value = "/homeRequest", method = RequestMethod.POST)
+//    public @ResponseBody String addComment3(Model model) {
+////        Document newDocument = DocumentService.create(Document);
+//
+////        return jsonSerializer.serialize(newDocument);
+//
+//
+////        String text = "<link rel='import' href='/home.jsp'>";
+//        String text = "ghj";
+//        //model.addAttribute("action", "about_myself");
+//        System.out.println("controller3");
+//        return text;
+//    }
+    @RequestMapping(value = "/audio", method = RequestMethod.GET)
+    public @ResponseBody String addComment(Model model) {
+//        List<Comments> comments = commentsService.findByNewsId(id);
+        String comments = "HOME";
+        model.addAttribute("name", "name");
         System.out.println("controller");
-        return text;
-    }
-
-
-    @RequestMapping(value = "/about_myselfRequest", method = RequestMethod.POST)
-    public @ResponseBody String addComment2(Model model) {
-        String text = "Test about_myselfRequest";
-        //model.addAttribute("action", "about_myself");
-        System.out.println("controller2");
-        return text;
+        return comments;
     }
 }
