@@ -1,8 +1,12 @@
 function change(href) {
+    alert("JS Change()");
     var xmlHttpRequest = getXMLHttpRequest();
     xmlHttpRequest.onreadystatechange = getReadyStateHandler(xmlHttpRequest);
-    xmlHttpRequest.open("POST", href, false);
+    xmlHttpRequest.open("GET", "/ShowServlet?action=about_myself", false);
+    xmlHttpRequest.setRequestHeader("Content-Type", "multipart/form-data");
     xmlHttpRequest.send();
+    alert(xmlHttpRequest);
+    xmlHttpRequest.getAllResponseHeaders();
     document.getElementById("changebody").innerHTML = xmlHttpRequest.responseText;
 }
 
