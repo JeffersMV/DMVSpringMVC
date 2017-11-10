@@ -34,11 +34,8 @@ public class MainController {
 
     @RequestMapping(value = "/ShowServlet", method = RequestMethod.GET)
     protected ModelAndView service(HttpServletRequest request) throws ServletException, IOException {
-        System.out.println("Сработал ShowServlet");
-        System.out.println("Параметр action = " + request.getParameter("action"));
         ModelAndView modelAndView = new ModelAndView();
         if (Objects.equals(request.getParameter("action"), "audio")) {
-            System.out.println("Сработал параметр Аудио!");
             modelAndView = sendDTOListOnPage(audiosRepository);
         } else if (Objects.equals(request.getParameter("action"), "video")) {
             modelAndView = sendDTOListOnPage(videosRepository);
@@ -47,10 +44,8 @@ public class MainController {
         } else if (Objects.equals(request.getParameter("action"), "onePhoto")) {
             modelAndView = sendPhotoDTOOnPage(request);
         } else {
-            System.out.println("Не прошёл параметр!");
             modelAndView.setViewName("/index");
         }
-
         return modelAndView;
     }
 
@@ -73,7 +68,6 @@ public class MainController {
         Photo photo;
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
-            System.out.println(id);
             photo = photosRepository.getOne(id);
             modelAndView.addObject("photo", photo);
         } catch (Exception e) {

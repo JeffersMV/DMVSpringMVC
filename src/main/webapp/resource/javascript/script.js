@@ -1,13 +1,22 @@
 function change(href) {
-    alert("JS Change()");
     var xmlHttpRequest = getXMLHttpRequest();
     xmlHttpRequest.onreadystatechange = getReadyStateHandler(xmlHttpRequest);
-    xmlHttpRequest.open("GET", "/ShowServlet?action=about_myself", false);
+    xmlHttpRequest.open("GET", href, false);
     xmlHttpRequest.setRequestHeader("Content-Type", "multipart/form-data");
     xmlHttpRequest.send();
-    alert(xmlHttpRequest);
-    xmlHttpRequest.getAllResponseHeaders();
-    document.getElementById("changebody").innerHTML = xmlHttpRequest.responseText;
+}
+
+function sendE() {
+    var elAction = encodeURIComponent(document.forms['formSend']['action'].value);
+    var elName = encodeURIComponent(document.forms['formSend']['name'].value);
+    var elPhone = encodeURIComponent(document.forms['formSend']['phone'].value);
+    var elMail = encodeURIComponent(document.forms['formSend']['e-mail'].value);
+    var params = "action="+elAction+"&name=" + elName + "&phone=" + elPhone + "&e-mail=" + elMail;
+    var xmlHttpRequest = getXMLHttpRequest();
+    xmlHttpRequest.onreadystatechange = getReadyStateHandler(xmlHttpRequest);
+    xmlHttpRequest.open("GET", "/sendEmail?"+params, false);
+    xmlHttpRequest.setRequestHeader("Content-Type", "multipart/form-data");
+    xmlHttpRequest.send(null);
 }
 
 function getXMLHttpRequest() {
@@ -32,32 +41,11 @@ function getReadyStateHandler(xmlHttpRequest) {
     return function () {
         if (xmlHttpRequest.readyState === 4) {
             if (xmlHttpRequest.status === 200) {
-                console.log(xmlHttpRequest.responseText);
-                document.getElementById("homeResponse").innerHTML = xmlHttpRequest.responseText;
+                // console.log(xmlHttpRequest.response);
+                document.body.innerHTML = xmlHttpRequest.responseText;
             } else {
                 alert("HTTP error " + xmlHttpRequest.status + ": " + xmlHttpRequest.statusText);
             }
         }
     };
-}
-
-
-function makeRequest() {
-    var xmlHttpRequest = getXMLHttpRequest();
-    xmlHttpRequest.onreadystatechange = getReadyStateHandler(xmlHttpRequest);
-    xmlHttpRequest.open("GET", "/c1", true);
-    xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlHttpRequest.send();
-}
-
-function audio() {
-    var xmlHttpRequest = getXMLHttpRequest();
-    xmlHttpRequest.onreadystatechange = getReadyStateHandler(xmlHttpRequest);
-    xmlHttpRequest.open("GET", "/ShowServlet?action=audio", true);
-    // alert(xmlHttpRequest.getAllResponseHeaders());
-    xmlHttpRequest.setRequestHeader("Content-Type", "multipart/form-data");
-    // alert(xmlHttpRequest.getAllResponseHeaders());
-    xmlHttpRequest.send("action=audio");
-    alert(xmlHttpRequest.getAllResponseHeaders());
-    document.getElementById("changebody").innerHTML = xmlHttpRequest.responseText;
 }

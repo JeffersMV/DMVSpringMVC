@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<core:url value="/css/menu.css" />">
     <link rel="stylesheet" type="text/css" href="<core:url value="/css/replaceable_body.css" />">
     <link rel="stylesheet" type="text/css" href="<core:url value="/css/bottom.css" />">
-    <script rel="script" type="text/javascript" src="/javascript/script.js"></script>
+    <script rel="script" type="text/javascript" src="<core:url value="/javascript/script.js"/>"></script>
 </head>
 <body>
 <div style="position: relative">
@@ -40,7 +40,7 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="/ShowServlet" title="Здесь ссылка на главную">Главная</a>
+                <a onclick="change('/ShowServlet')" title="Здесь ссылка на главную">Главная</a>
             </li>
             <li>
                 <a onclick="change('/ShowServlet?action=about_myself')" title="Здесь информация о cебе">О себе</a>
@@ -48,33 +48,31 @@
             <li>
                 <a href="" title="Здесь галерея Аудио Видео Фото">Галерея</a>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/ShowServlet?action=audio">Аудио</a></li>
-                    <li><a href="${pageContext.request.contextPath}/ShowServlet?action=video">Видео</a></li>
-                    <li><a href="${pageContext.request.contextPath}/ShowServlet?action=photo">Фото</a></li>
+                    <li><a onclick="change('/ShowServlet?action=audio')">Аудио</a></li>
+                    <li><a onclick="change('/ShowServlet?action=video')">Видео</a></li>
+                    <li><a onclick="change('/ShowServlet?action=photo')">Фото</a></li>
                 </ul>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/ShowServlet?action=cost" title="Стоимость">Стоимость</a>
+                <a onclick="change('/ShowServlet?action=cost')" title="Стоимость">Стоимость</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/ShowServlet?action=reviews" title="Отзывы">Отзывы</a>
+                <a onclick="change('/ShowServlet?action=reviews')" title="Отзывы">Отзывы</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/ShowServlet?action=contacts" title="Контакты">Контакты</a>
+                <a onclick="change('/ShowServlet?action=contacts')" title="Контакты">Контакты</a>
             </li>
         </ul>
 
     </header>
     <%----------------------------------------------EXCHANGE------------------------------------------------%>
     <div class="exchange">
-        <div id="changebody"></div>
-
         <core:choose>
             <%--О СЕБЕ--%>
             <core:when test="${param.get('action') == 'about_myself'}">
                 <div class="replaceable_body">
                     <div class="avatar">
-                        <img src="/img/Mike.jpg" width="350px">
+                        <img src="<core:url value="/img/Mike.jpg"/>" width="350px">
                     </div>
                     <p> Изъеденные каждодневными размышлениями, измученные (и в снах рассуждающие) ночами, измельченные
                         до
@@ -139,7 +137,7 @@
                         <core:forEach var="dto" items="${dtoList}">
                             <li><p>${dto.id}|${dto.name}</p>
                                 <audio controls style="width: 480px">
-                                    <source src="${dto.audio}" type="audio/mpeg">
+                                    <source src="${dto.audio}" type="audio/mp3">
                                     Тег audio не поддерживается вашим браузером.
                                     <a href="${dto.audio}">SAVE</a>.
                                 </audio>
@@ -168,7 +166,7 @@
                     <ul class="double">
                             <%--@elvariable id="dtoList" type="java.util.List"--%>
                         <core:forEach var="dto" items="${dtoList}">
-                            <li><a href="${pageContext.request.contextPath}/ShowServlet?action=onePhoto&id=${dto.id}" title="${dto.name}">
+                            <li><a onclick="change('/ShowServlet?action=onePhoto&id=${dto.id}')" title="${dto.name}">
                                 <p>${dto.id}|${dto.name}</p>
                                 <img src="${dto.photo}" width="480">
                             </a>
@@ -182,7 +180,7 @@
                 <jsp:useBean id="photo" scope="request" type="entity.Photo"/>
                 <div class="replaceable_body">
                     <ul class="double">
-                        <li style="width: 100%"><a href="${pageContext.request.contextPath}/ShowServlet?action=photo" title="${photo.name}">
+                        <li style="width: 100%"><a onclick="change('/ShowServlet?action=photo')" title="${photo.name}">
                             <p style="width: 1020px">${photo.id}|<fmt:formatDate pattern="yyyy-MM-dd" value="${photo.date}"/>|${photo.name}</p>
                             <img src="${photo.photo}" width="1020">
                         </a>
@@ -419,7 +417,7 @@
                 ОТПРАВИТЬ ЗАЯВКУ
             </p>
             <div>
-                <form action="${pageContext.request.contextPath}/sendEmail" method="get" novalidate="novalidate">
+                <form name="formSend" method="GET" novalidate="novalidate" onsubmit="sendE()">
                     <input type="text" name="name" value="<core:if test="${param.get('name') != null}">${param.get('name')}</core:if>" required="required" placeholder="Ваше имя"/><br>
                     <input type="text" name="phone" value="<core:if test="${param.get('phone') != null}">${param.get('phone')}</core:if>" required="required" placeholder="+375 __ ___ __ __"/><br>
                     <input type="text" name="e-mail" value="<core:if test="${param.get('e-mail') != null}">${param.get('e-mail')}</core:if>" required="required" placeholder="E-mail"/><br>
