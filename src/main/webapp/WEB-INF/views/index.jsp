@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -10,18 +9,22 @@
     <meta name="keywords" content="уроки гитары минск,уроки гитары в минске,уроки гитары минск для начинающих,уроки гитары для начинающих в минске,
       уроки игры на гитаре минск,уроки игры на гитаре в минске,уроки игры для начинающих минск,уроки игры на гитаре для начинающих в минске,
       курсы гитары минск,курсы гитары в минске,школа гитары минск,школа гитары в минске,уроки электрогитары минск,курсы электрогитары минск">
+    <link rel="shortcut icon" href="<core:url value="/img/kvintapICO.ico"/>">
     <link rel="stylesheet" type="text/css" href="<core:url value="/css/bootstrap.css" />">
-    <link rel="stylesheet" type="text/css" href="<core:url value="/css/header.css" />">
+    <link rel="stylesheet" type="text/css" href="<core:url value="/css/cap.css" />">
     <link rel="stylesheet" type="text/css" href="<core:url value="/css/menu.css" />">
     <link rel="stylesheet" type="text/css" href="<core:url value="/css/replaceable_body.css" />">
-    <link rel="stylesheet" type="text/css" href="<core:url value="/css/bottom.css" />">
-    <script rel="script" type="text/javascript" src="<core:url value="/javascript/script.js"/>"></script>
+    <link rel="stylesheet" type="text/css" href="<core:url value="/css/bid.css" />">
+    <script rel="script" type="text/javascript" src="<core:url value="/javascript/http_ajax.googleapis.com_ajax_libs_jquery_3.2.1_jquery.js"/>"></script>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
+    <%--<script rel="script" type="text/javascript" src="<core:url value="/javascript/script.js"/>"></script>--%>
+    <script rel="script" type="text/javascript" src="<core:url value="/javascript/jquery.js"/>"></script>
 </head>
 <body>
 <div style="position: relative">
     <header>
-        <div class="header">
-            <div class="left_header">
+        <div id="cap">
+            <div id="cap_left">
                 <h2>
                     <span>Репетиторство</span><br>
                     Михаила Владимировича
@@ -32,37 +35,39 @@
                     игры на ГИТАРЕ
                 </h3>
             </div>
-            <div class="right_header">
-                <p class="phone_right_header">+375 29 254 24 91</p>
-                <p>Viber: +375 29 254 24 91<br>
-                    Skype: dmv.com</p>
+            <div id="cap_right">
+                <p id="cap_right_phone">+375 00 000 00 00</p>
+                <p>Viber: +375 00 000 00 00<br>
+                    Skype: ..........</p>
             </div>
         </div>
-        <ul id="menu">
-            <li>
-                <a onclick="change('/ShowServlet')" title="Здесь ссылка на главную">Главная</a>
-            </li>
-            <li>
-                <a onclick="change('/ShowServlet?action=about_myself')" title="Здесь информация о cебе">О себе</a>
-            </li>
-            <li>
-                <a href="" title="Здесь галерея Аудио Видео Фото">Галерея</a>
-                <ul>
-                    <li><a onclick="change('/ShowServlet?action=audio')">Аудио</a></li>
-                    <li><a onclick="change('/ShowServlet?action=video')">Видео</a></li>
-                    <li><a onclick="change('/ShowServlet?action=photo')">Фото</a></li>
-                </ul>
-            </li>
-            <li>
-                <a onclick="change('/ShowServlet?action=cost')" title="Стоимость">Стоимость</a>
-            </li>
-            <li>
-                <a onclick="change('/ShowServlet?action=reviews')" title="Отзывы">Отзывы</a>
-            </li>
-            <li>
-                <a onclick="change('/ShowServlet?action=contacts')" title="Контакты">Контакты</a>
-            </li>
-        </ul>
+        <div id="menu">
+            <ul>
+                <li>
+                    <a onclick="change('/ShowServlet')" title="Здесь ссылка на главную">Главная</a>
+                </li>
+                <li>
+                    <a onclick="change('/ShowServlet?action=about_myself')" title="Здесь информация о cебе">О себе</a>
+                </li>
+                <li>
+                    <a title="Здесь галерея Аудио Видео Фото">Галерея</a>
+                    <ul>
+                        <li><a onclick="change('/ShowServlet?action=audio')">Аудио</a></li>
+                        <li><a onclick="change('/ShowServlet?action=video')">Видео</a></li>
+                        <li><a onclick="change('/ShowServlet?action=photo')">Фото</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a onclick="change('/ShowServlet?action=cost')" title="Стоимость">Стоимость</a>
+                </li>
+                <li>
+                    <a onclick="change('/ShowServlet?action=reviews')" title="Отзывы">Отзывы</a>
+                </li>
+                <li>
+                    <a onclick="change('/ShowServlet?action=contacts')" title="Контакты">Контакты</a>
+                </li>
+            </ul>
+        </div>
 
     </header>
     <%----------------------------------------------EXCHANGE------------------------------------------------%>
@@ -70,9 +75,9 @@
         <core:choose>
             <%--О СЕБЕ--%>
             <core:when test="${param.get('action') == 'about_myself'}">
-                <div class="replaceable_body">
+                <div class="common_content text_justify">
                     <div class="avatar">
-                        <img src="<core:url value="/img/Mike.jpg"/>" width="350px">
+                        <img src="<core:url value="/photo/Mike.jpg"/>">
                     </div>
                     <p> Изъеденные каждодневными размышлениями, измученные (и в снах рассуждающие) ночами, измельченные
                         до
@@ -131,12 +136,11 @@
             </core:when>
             <%--AUDIO--%>
             <core:when test="${param.get('action') == 'audio'}">
-                <div class="replaceable_body">
-                    <ul class="double">
-                            <%--@elvariable id="dtoList" type="java.util.List"--%>
+                <div class="individual_content">
+                    <ul class="styleAudio">
                         <core:forEach var="dto" items="${dtoList}">
                             <li><p>${dto.id}|${dto.name}</p>
-                                <audio controls style="width: 480px">
+                                <audio controls>
                                     <source src="${dto.audio}" type="audio/mp3">
                                     Тег audio не поддерживается вашим браузером.
                                     <a href="${dto.audio}">SAVE</a>.
@@ -148,13 +152,11 @@
             </core:when>
             <%--VIDEO--%>
             <core:when test="${param.get('action') == 'video'}">
-                <div class="replaceable_body">
-                    <ul class="double">
-                            <%--@elvariable id="dtoList" type="java.util.List"--%>
+                <div class="individual_content">
+                    <ul class="styleVideo">
                         <core:forEach var="dto" items="${dtoList}">
                             <li><p>${dto.id}|${dto.name}</p>
-                                <iframe width="480" height="270" src="${dto.video}" frameborder="0" allowfullscreen
-                                        align="center"></iframe>
+                                <iframe src="${dto.video}" allowfullscreen></iframe>
                             </li>
                         </core:forEach>
                     </ul>
@@ -162,118 +164,85 @@
             </core:when>
             <%--PHOTO--%>
             <core:when test="${param.get('action') == 'photo'}">
-                <div class="replaceable_body">
-                    <ul class="double">
-                            <%--@elvariable id="dtoList" type="java.util.List"--%>
+                <div class="common_content">
+                    <div class="stylePhoto">
                         <core:forEach var="dto" items="${dtoList}">
-                            <li><a onclick="change('/ShowServlet?action=onePhoto&id=${dto.id}')" title="${dto.name}">
-                                <p>${dto.id}|${dto.name}</p>
-                                <img src="${dto.photo}" width="480">
-                            </a>
-                            </li>
+                            <div>
+                                <a onclick="change('/ShowServlet?action=onePhoto&id=${dto.id}')" title="${dto.name}">
+                                    <p>${dto.id}|${dto.name}</p>
+                                    <img src="${dto.photo}">
+                                </a>
+                            </div>
                         </core:forEach>
-                    </ul>
+                    </div>
                 </div>
             </core:when>
             <%--ONE PHOTO--%>
             <core:when test="${param.get('action') == 'onePhoto'}">
                 <jsp:useBean id="photo" scope="request" type="entity.Photo"/>
-                <div class="replaceable_body">
-                    <ul class="double">
-                        <li style="width: 100%"><a onclick="change('/ShowServlet?action=photo')" title="${photo.name}">
-                            <p style="width: 1020px">${photo.id}|<fmt:formatDate pattern="yyyy-MM-dd" value="${photo.date}"/>|${photo.name}</p>
-                            <img src="${photo.photo}" width="1020">
-                        </a>
+                <div class="common_content">
+                    <ul class="double styleOnePhoto">
+                        <li>
+                            <a onclick="change('/ShowServlet?action=photo')" title="fgh">
+                                <p>${photo.id}|<fmt:formatDate pattern="yyyy-MM-dd" value="${photo.date}"/>|${photo.name}</p>
+                                <img src="${photo.photo}">
+                            </a>
                         </li>
                     </ul>
                 </div>
             </core:when>
             <%--СТОИМОСТЬ--%>
             <core:when test="${param.get('action') == 'cost'}">
-                <div class="replaceable_body">
-                    <table class="cost">
-                        <colgroup>
-                            <col class="">
-                        </colgroup>
+                <div class="common_content">
+                    <table class="cost text_center">
+
                         <thead>
                         <tr>
                             <th rowspan="2"></th>
                             <th>
                                 Абонемент на 1 месяц
-                                <p style="text-align: center">(8 занятий)</p>
+                                <p>(8 занятий)</p>
                             </th>
                             <th>
                                 Базовый курс — 3 месяца
-
-                                <p style="text-align: center">(24 занятия)</p>
+                                <p>(24 занятия)</p>
                             </th>
                             <th>
                                 Базовый курс — 4 месяца
-
-                                <p style="text-align: center">(32 занятия)</p>
+                                <p>(32 занятия)</p>
                             </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>Индивидуально</td>
-                            <td style="text-align: center;">
-                                <strong> 134 руб.</strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong> 402 руб.</strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong>536 руб. </strong>
-                            </td>
+                            <td>134 руб.</td>
+                            <td>402 руб.</td>
+                            <td>536 руб.</td>
                         </tr>
                         <tr>
                             <td>Парные</td>
-                            <td style="text-align: center;">
-                                <strong> 76 руб.</strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong>228 руб. </strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong>304 руб. </strong>
-                            </td>
+                            <td>76 руб.</td>
+                            <td>228 руб.</td>
+                            <td>304 руб.</td>
                         </tr>
                         <tr>
                             <td>Малая группа (3-4 чел.)</td>
-                            <td style="text-align: center;">
-                                <strong> 67 руб.</strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong> 201 руб.</strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong>268 руб.</strong>
-                            </td>
+                            <td>67 руб.</td>
+                            <td>201 руб.</td>
+                            <td>268 руб.</td>
                         </tr>
                         <tr>
                             <td>Группа (5-7 чел.)</td>
-                            <td style="text-align: center;">
-                                <strong> 54 руб.</strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong> 162 руб.</strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong>216 руб.</strong>
-                            </td>
+                            <td>54 руб.</td>
+                            <td>162 руб.</td>
+                            <td>216 руб.</td>
                         </tr>
                         <tr>
                             <td>Занятия у Вас дома!</td>
-                            <td style="text-align: center;">
-                                <strong> 160 руб.</strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong> 480 руб.</strong>
-                            </td>
-                            <td style="text-align: center;">
-                                <strong>640 руб.</strong>
-                            </td>
+                            <td> 160 руб.</td>
+                            <td> 480 руб.</td>
+                            <td>640 руб.</td>
                         </tr>
                         </tbody>
                     </table>
@@ -281,7 +250,7 @@
             </core:when>
             <%--ОТЗЫВЫ--%>
             <core:when test="${param.get('action') == 'reviews'}">
-                <div class="replaceable_body">
+                <div class="common_content text_justify">
                     <p>
                         Анастасия:<br>
                         15.03.2017 в 13:40<br>
@@ -295,7 +264,9 @@
                         вовремя показывать и корректировать
                         ошибки. И результат мне очень нравится smile
                     </p>
-                    <p>
+                </div>
+                <div class="common_content text_justify">
+                     <p>
                         Рагнеда:<br>
                         14.03.2017 в 22:41<br>
                         Очень хорошая студия! К каждому ученику индивидуальный подход! Интересный интерьер, творческая
@@ -305,6 +276,8 @@
                         разнообразные концерты yes Скучно не будет)) Довольно удобное расположение, находится в центре.
                         Всем советую!
                     </p>
+                </div>
+                <div class="common_content text_justify">
                     <p>
                         Александр:<br>
                         15.03.2017 в 10:46<br>
@@ -325,49 +298,48 @@
             </core:when>
             <%--КОНТАКТЫ--%>
             <core:when test="${param.get('action') == 'contacts'}">
-                <div class="replaceable_body" style="text-align: center">
-                    <p style="text-align: center; margin-top: 75px; font-size: 26px">+375 29 254 24 91</p>
-                    <p style="text-align: center">Viber: +375 29 254 24 91</p>
-                    <p style="text-align: center">Skype: dmv.com</p>
-                    <iframe class="contacts"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.2499034291304!2d27.4940230242791!3d53.909535008103106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbc545f13526d9%3A0x6858a3626c124c34!2z0J_Rg9GI0LrQuNC90YHQutCw0Y8!5e0!3m2!1sru!2sby!4v1490357860100"
+                <div class="common_content text_center">
+                    <p>GSM: +375 00 000 00 00</p>
+                    <p>Viber: +375 00 000 00 00</p>
+                    <p>Skype: ..........</p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.2499034291304!2d27.4940230242791!3d53.909535008103106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbc545f13526d9%3A0x6858a3626c124c34!2z0J_Rg9GI0LrQuNC90YHQutCw0Y8!5e0!3m2!1sru!2sby!4v1490357860100"
                             width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    <p style="text-align: center">Помогите нам стать лучше! Если у вас есть предложения по улучшению
+                    <p>Помогите нам стать лучше! Если у вас есть предложения по улучшению
                         работы студии - высылайте на
-                        dmv@gmail.com.</p>
+                        ..........@gmail.com.</p>
                 </div>
             </core:when>
             <%--ERROR--%>
             <core:when test="${action == 'error'}">
-                <div class="replaceable_body">
+                <div class="common_content">
                     <core:if test="${error == 'name_error'}">
-                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                        <p class="errorSend">
                             Введите пожалуйста Ваше имя!
                         </p>
                     </core:if>
                     <core:if test="${error == 'phone_error'}">
-                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                        <p class="errorSend">
                             Введите пожалуйста Ваш номер телефона!
                         </p>
                     </core:if>
-                    <core:if test="${error == 'e-mail_error'}">
-                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                    <core:if test="${error == 'email_error'}">
+                        <p class="errorSend">
                             Введите пожалуйста Ваш E-mail!
                         </p>
                     </core:if>
                     <core:if test="${error == 'connect_BD'}">
-                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                        <p class="errorSend">
                             Ошибка подключения, не могу достучаться до Базы Данных!
                         </p>
                     </core:if>
-                    <core:if test="${error == 'send_e-mail'}">
-                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                    <core:if test="${error == 'send_email'}">
+                        <p class="errorSend">
                             Ошибка отправки данных, какой-то сбой в программе произошёл при отправки!
                             Пожалуйста воспользуйтесь вкладкой КОНТАКТЫ и выберети сбособ связи удобный для Вас!
                         </p>
                     </core:if>
                     <core:if test="${error == 'server'}">
-                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                        <p class="errorSend">
                             Ошибка приложения, какой-то сбой в программе!
                         </p>
                     </core:if>
@@ -375,19 +347,19 @@
             </core:when>
             <%--ACTION--%>
             <core:when test="${action == 'SEND'}">
-                <div class="replaceable_body">
-                    <p style="text-align: center; font-size: 30px; font-style: oblique; color: #000000">
-                        Заявка отправлена ${name} c ${e-mail}!<br>
+                <div class="common_content">
+                    <p class="errorSend">
+                        Заявка отправлена ${param.get('name')} c ${param.get('email')}!<br>
                         Вам перезвонят в течение дня на номер<br>
-                        "${phone}"!
+                        "${param.get('phone')}"!
                     </p>
                 </div>
             </core:when>
             <%--ГЛАВНАЯ--%>
             <core:otherwise>
-                <div class="replaceable_body">
+                <div class="common_content text_justify">
                     <div class="avatar">
-                        <img src="/img/Mike.jpg" width="350px">
+                        <img src="<core:url value="/img/avatar.jpg"/>">
                     </div>
                     <p> Многие культовые музыканты начинали свой путь с того, что подбирали или сочиняли песни под
                         гитару.
@@ -404,24 +376,23 @@
                         <br><br>
                         Если же у вас есть желание сочинять музыку, мы также поможем вам в этом.
                         Многие необыкновенно лиричные музыкальные шедевры звучали просто под гитару!
-                        <br><br> <br>
                     </p>
                 </div>
             </core:otherwise>
         </core:choose>
     </div>
-    <%----------------------------------------------------BOT-----------------------------------------------------%>
-    <div class="bot">
-        <div id="bottom">
+    <%----------------------------------------------------BOTTOM--------------------------------------------------%>
+    <div class="bottom">
+        <div id="bid">
             <p>
                 ОТПРАВИТЬ ЗАЯВКУ
             </p>
             <div>
-                <form name="formSend" method="GET" novalidate="novalidate" onsubmit="sendE()">
-                    <input type="text" name="name" value="<core:if test="${param.get('name') != null}">${param.get('name')}</core:if>" required="required" placeholder="Ваше имя"/><br>
-                    <input type="text" name="phone" value="<core:if test="${param.get('phone') != null}">${param.get('phone')}</core:if>" required="required" placeholder="+375 __ ___ __ __"/><br>
-                    <input type="text" name="e-mail" value="<core:if test="${param.get('e-mail') != null}">${param.get('e-mail')}</core:if>" required="required" placeholder="E-mail"/><br>
-                    <input type="submit" name="action" value="SEND"/>
+                <form name="formSend" novalidate="novalidate" autocomplete="off">
+                    <input type="text" name="name" value="<core:if test="${param.get('name') != null}">${param.get('name')}</core:if>" required="required" placeholder="Ваше имя" autocomplete="name"/><br>
+                    <input type="text" name="phone" value="<core:if test="${param.get('phone') != null}">${param.get('phone')}</core:if>" required="required" placeholder="+375 __ ___ __ __" autocomplete="phone"/><br>
+                    <input type="text" name="email" value="<core:if test="${param.get('email') != null}">${param.get('email')}</core:if>" required="required" placeholder="E-mail" autocomplete="email"/><br>
+                    <input type="button" name="action" value="SEND" onclick="sendE()"/>
                 </form>
             </div>
         </div>

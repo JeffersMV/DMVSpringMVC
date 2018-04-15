@@ -10,8 +10,8 @@ function sendE() {
     var elAction = encodeURIComponent(document.forms['formSend']['action'].value);
     var elName = encodeURIComponent(document.forms['formSend']['name'].value);
     var elPhone = encodeURIComponent(document.forms['formSend']['phone'].value);
-    var elMail = encodeURIComponent(document.forms['formSend']['e-mail'].value);
-    var params = "action="+elAction+"&name=" + elName + "&phone=" + elPhone + "&e-mail=" + elMail;
+    var elMail = encodeURIComponent(document.forms['formSend']['email'].value);
+    var params = "action="+elAction+"&name=" + elName + "&phone=" + elPhone + "&email=" + elMail;
     var xmlHttpRequest = getXMLHttpRequest();
     xmlHttpRequest.onreadystatechange = getReadyStateHandler(xmlHttpRequest);
     xmlHttpRequest.open("GET", "/sendEmail?"+params, false);

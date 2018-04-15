@@ -1,20 +1,27 @@
 * {
-    font-family: "Comic Sans MS";
-    box-sizing: border-box;
+    font-family: "Comic Sans MS", sans-serif;
 }
 
 body {
-    background-color: #cccccc;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: #113141 url("../img/background.jpg") center top no-repeat fixed ;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
-header .exchange .bot {
+header .exchange .bottom {
     width: auto;
-    background: #c60016;
     display: block;
 }
 
-.bot {
+.bottom {
     margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 

@@ -1,4 +1,4 @@
-#menu {
+#menu ul:first-child{
     display: flex;
     height: auto;
     margin-left: auto;
@@ -9,7 +9,7 @@
     list-style: none;
 }
 
-#menu li {
+#menu ul li {
     float: left;
     display: block;
     margin-left: 10px;
@@ -18,81 +18,64 @@
     width: inherit;
 }
 
-#menu li a {
+#menu ul li a {
     color: #fff;
     font-size: 22px;
     text-align: center;
     text-decoration: none;
-    background: #233041 url(../img/bkg-1.jpg) 0 0;
+    background: #233041 url(../img/menu.jpg) 0 0;
     display: block;
     padding: 10px;
     overflow: hidden;
-
-    /*Переход*/
     -webkit-transition: All 0.8s ease;
     -moz-transition: All 0.8s ease;
     -o-transition: All 0.8s ease;
     -ms-transition: All 0.8s ease;
     transition: All 0.8s ease;
-    /* Задаю скругленные углы*/
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    /* Тень для визуальной приподнятости текста*/
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.74);
-    /*Тень*/
     -webkit-box-shadow: 0 3px 1px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 3px 1px rgba(0, 0, 0, 0.2);
     box-shadow: 0 3px 1px rgba(0, 0, 0, 0.2);
 }
 
-#menu li a:hover {
+#menu ul li a:hover {
     color: #909090;
     background-position: 0 150px;
 }
 
-/* НАСТРАИВАЕМ ВЫПАДАЮЩИЕ ЭЛЕМЕНТЫ!!! */
-#menu ul {
-    /* Убираю маркеры у выпадающего списка*/
+#menu ul li ul {
     list-style: none;
-    left: -9999px; /* Убираю ненужно за пределы экрана (говорят, это на 95% лучше чем «display:none;», т.к. дисплей нон некоторые программы игнорируют). */
-    opacity: 0; /* При помощи прозрачности, скрываем <ul>. */
-    /* Делаем так, чтобы Webkit плавно показывал нам всплывающие элементы выпадающего списка при наведении мышки. */
+    left: -9999px;
+    opacity: 0;
     -webkit-transition: 0.24s linear opacity;
     position: absolute;
     z-index: 1;
 }
 
-#menu ul li {
-    /* Здесь я задаю отступ между элементами &lt;li&gt;. Это необходимо для разделения пунктов меню, его не было в предыдущей части статьи (просто забыл)*/
+#menu ul li ul li {
     padding-top: 1px;
     float: none;
 }
 
-#menu ul a {
+#menu ul li ul a {
     display: block;
-    /* Запрещаю перенос строк текста на новую строку, чтобы создавался многострочный выпадающий элемент списка. */
     white-space: nowrap;
 }
 
-#menu li:hover ul { /* Создаю выпадающий пункт, который появится при наведении. */
-    left: 0; /* Возвращаю его обратно на экран пользователя, — когда нужно. */
-    opacity: 1; /* Убираю прозрачность*/
+#menu ul li:hover ul {
+    left: 0;
+    opacity: 1;
 }
 
-/*#menu li:hover a { !* В этом стиле я устанавливаю свойства для элементов верхнего уровня, — в то время, когда показывается выпадающий список. *!*/
-    /*!* Сделаю полупрозрачным. *!*/
-    /*background: rgba(109, 15, 53, 0.74);*/
-    /*background: #6b0c36;*/
-/*}*/
-
-#menu li:hover ul a { /* Поменял некоторые стили первого уровня при появлении выпадающего элемента. */
+#menu ul li:hover ul a {
     -webkit-transition: -webkit-transform 0.077s linear;
 }
 
-#menu li:hover ul li a:hover { /* Здесь я задаю стили для конкретных выпадающих пунктов, при наведении на них курсора — чтобы они отличались от тех элементов, куда курсор не попадает*/
+#menu ul li:hover ul li a:hover {
     background-position: 0 150px;
-    /*Переход*/
     -webkit-transition: All 0.8s ease;
     -moz-transition: All 0.8s ease;
     -o-transition: All 0.8s ease;

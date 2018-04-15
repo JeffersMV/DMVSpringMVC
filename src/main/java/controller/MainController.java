@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -65,11 +66,11 @@ public class MainController {
 
     private ModelAndView sendPhotoDTOOnPage(HttpServletRequest request) throws ServletException, IOException {
         ModelAndView modelAndView = new ModelAndView();
-        Photo photo;
+        Optional<Photo> photoOptional;
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
-            photo = photosRepository.getOne(id);
-            modelAndView.addObject("photo", photo);
+            photoOptional = photosRepository.findById(id);
+            modelAndView.addObject("photo", photoOptional.get());
         } catch (Exception e) {
             modelAndView.addObject("action", "error");
             modelAndView.addObject("error", "connect_BD");
@@ -88,27 +89,29 @@ public class MainController {
             } else if (request.getParameter("phone").isEmpty()) {
                 modelAndView.addObject("action", "error");
                 modelAndView.addObject("error", "phone_error");
-            } else if (request.getParameter("e-mail").isEmpty()) {
+            } else if (request.getParameter("email").isEmpty()) {
                 modelAndView.addObject("action", "error");
-                modelAndView.addObject("error", "e-mail_error");
+                modelAndView.addObject("error", "email_error");
             } else {
                 String name = request.getParameter("name");
                 String phone = request.getParameter("phone");
+                String mail = request.getParameter("email");
                 try {
                     SimpleEmail email = new SimpleEmail();
                     email.setSSLOnConnect(true);
                     email.setHostName("smtp.gmail.com");
                     email.setSmtpPort(465);
                     email.setSubject("DMV " + phone + "|" + name);
-                    email.setAuthenticator(new DefaultAuthenticator("User Name", "Password"));
-                    email.addTo("dmv@gmail.com", "DMV.com");
-                    email.setFrom(request.getParameter("e-mail"), name);
+                    email.setAuthenticator(new DefaultAuthenticator("kvintap.by", "dmvqwerty"));
+                    email.addTo("kvintap.by@gmail.com", "DMV.com");
+                    email.setFrom(mail, name);
                     email.setMsg("Text + " + phone + "|" + name);
                     email.send();
+                    modelAndView.addObject("action", "SEND");
                 } catch (EmailException e) {
                     e.getStackTrace();
                     modelAndView.addObject("action", "error");
-                    modelAndView.addObject("error", "send_e-mail");
+                    modelAndView.addObject("error", "send_email");
                 }
             }
         }
