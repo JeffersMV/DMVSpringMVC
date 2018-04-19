@@ -36,31 +36,40 @@ public class MainController {
     @RequestMapping(value = "/ShowServlet", method = RequestMethod.GET)
     protected ModelAndView service(HttpServletRequest request) throws ServletException, IOException {
         ModelAndView modelAndView = new ModelAndView();
-        if (Objects.equals(request.getParameter("action"), "audio")) {
-            modelAndView = sendDTOListOnPage(audiosRepository);
+
+        if (Objects.equals(request.getParameter("action"), "about_myself")) {
+            modelAndView.setViewName("/WEB-INF/views/about_myself.jsp");
+        } else if (Objects.equals(request.getParameter("action"), "audio")) {
+            modelAndView = sendDTOListOnPage(audiosRepository, "/WEB-INF/views/audio.jsp");
         } else if (Objects.equals(request.getParameter("action"), "video")) {
-            modelAndView = sendDTOListOnPage(videosRepository);
+            modelAndView = sendDTOListOnPage(videosRepository, "/WEB-INF/views/video.jsp");
         } else if (Objects.equals(request.getParameter("action"), "photo")) {
-            modelAndView = sendDTOListOnPage(photosRepository);
+            modelAndView = sendDTOListOnPage(photosRepository, "/WEB-INF/views/photo.jsp");
         } else if (Objects.equals(request.getParameter("action"), "onePhoto")) {
             modelAndView = sendPhotoDTOOnPage(request);
-        } else {
-            modelAndView.setViewName("/index");
+        } else if (Objects.equals(request.getParameter("action"), "cost")) {
+            modelAndView.setViewName("/WEB-INF/views/cost.jsp");
+        } else if (Objects.equals(request.getParameter("action"), "reviews")) {
+            modelAndView.setViewName("/WEB-INF/views/reviews.jsp");
+        } else if (Objects.equals(request.getParameter("action"), "contacts")) {
+            modelAndView.setViewName("/WEB-INF/views/contacts.jsp");
+        } else{
+            modelAndView.setViewName("/WEB-INF/views/home.jsp");
         }
         return modelAndView;
     }
 
-    private ModelAndView sendDTOListOnPage(JpaRepository jpaRepository) throws ServletException, IOException {
+    private ModelAndView sendDTOListOnPage(JpaRepository jpaRepository, String view) throws ServletException, IOException {
         ModelAndView modelAndView = new ModelAndView();
         List dtoList;
         try {
             dtoList = jpaRepository.findAll();
             modelAndView.addObject("dtoList", dtoList);
+            modelAndView.setViewName(view);
         } catch (Exception e) {
-            modelAndView.addObject("action", "error");
             modelAndView.addObject("error", "connect_BD");
+            modelAndView.setViewName("/WEB-INF/views/error.jsp");
         }
-        modelAndView.setViewName("/index");
         return modelAndView;
     }
 
@@ -71,27 +80,26 @@ public class MainController {
             Integer id = Integer.parseInt(request.getParameter("id"));
             photoOptional = photosRepository.findById(id);
             modelAndView.addObject("photo", photoOptional.get());
+            modelAndView.setViewName("/WEB-INF/views/onePhoto.jsp");
         } catch (Exception e) {
-            modelAndView.addObject("action", "error");
             modelAndView.addObject("error", "connect_BD");
+            modelAndView.setViewName("/WEB-INF/views/error.jsp");
         }
-        modelAndView.setViewName("/index");
         return modelAndView;
     }
 
     @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
     private ModelAndView sendEmail(HttpServletRequest request) throws ServletException, IOException {
         ModelAndView modelAndView = new ModelAndView();
-        if (Objects.equals(request.getParameter("action"), "SEND")) {
             if (request.getParameter("name").isEmpty()) {
-                modelAndView.addObject("action", "error");
                 modelAndView.addObject("error", "name_error");
+                modelAndView.setViewName("/WEB-INF/views/error.jsp");
             } else if (request.getParameter("phone").isEmpty()) {
-                modelAndView.addObject("action", "error");
                 modelAndView.addObject("error", "phone_error");
+                modelAndView.setViewName("/WEB-INF/views/error.jsp");
             } else if (request.getParameter("email").isEmpty()) {
-                modelAndView.addObject("action", "error");
                 modelAndView.addObject("error", "email_error");
+                modelAndView.setViewName("/WEB-INF/views/error.jsp");
             } else {
                 String name = request.getParameter("name");
                 String phone = request.getParameter("phone");
@@ -107,15 +115,13 @@ public class MainController {
                     email.setFrom(mail, name);
                     email.setMsg("Text + " + phone + "|" + name);
                     email.send();
-                    modelAndView.addObject("action", "SEND");
+                    modelAndView.setViewName("/WEB-INF/views/send.jsp");
                 } catch (EmailException e) {
                     e.getStackTrace();
-                    modelAndView.addObject("action", "error");
                     modelAndView.addObject("error", "send_email");
+                    modelAndView.setViewName("/WEB-INF/views/error.jsp");
                 }
             }
-        }
-        modelAndView.setViewName("/index");
         return modelAndView;
     }
 }

@@ -1,21 +1,16 @@
 function change(href) {
     $.get(href, function(html){
-        document.open("text/html", "replace");
-        document.write(html);
-        document.close();
+        $('.exchange').html(html);
     });
 }
 
 function sendE() {
-    var elAction = $('input[name = action]').val();
     var elName = $('input[name = name]').val();
     var elPhone = $('input[name = phone]').val();
     var elMail = $('input[name = email]').val();
-    var jqxhr = $.get('/sendEmail', {action:elAction, name:elName, phone:elPhone, email:elMail});
+    var jqxhr = $.get('/sendEmail', {name:elName, phone:elPhone, email:elMail});
         jqxhr.done(function(html){
-            document.open("text/html", "replace");
-            document.write(html);
-            document.close();
+            $('.exchange').html(html);
         });
         jqxhr.fail(function (jqXHR, exception) {
             var msg = '';
